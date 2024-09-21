@@ -1,4 +1,9 @@
 <div id="<%= dom_id student %>">
+  
+  <p>
+    <%= image_tag student.avatar.attached? ? url_for(student.avatar) : asset_path('default_image.jpg'), alt: "Student Avatar" %>
+  </p>
+
   <p>
     <strong>First name:</strong>
     <%= student.first_name %>
