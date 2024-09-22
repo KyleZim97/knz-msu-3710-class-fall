@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: Bill
+  last_name: Hill
+  school_email: bhill@msudenver.edu
+  major: CS
+  minor: BIO
+  graduation_date: 2024-09-17
+
+two:
+  first_name: Roger
+  last_name: Dome
+  school_email: rdome@msudenver.edu
+  major: CS
+  minor: MTH
+  graduation_date: 2024-09-17
