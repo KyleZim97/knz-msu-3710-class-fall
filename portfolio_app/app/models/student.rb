@@ -13,7 +13,7 @@ class Student < ApplicationRecord
         if avatar.attached?
             avatar
         else
-            'portfolio_app\app\assets\images\default_image.jpg'  # Path to your default image
+            'portfolio_app\app\assets\images\default_image.jpg' 
         end
     end
 
