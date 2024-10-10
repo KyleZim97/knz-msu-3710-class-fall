@@ -7,7 +7,10 @@ class Student < ApplicationRecord
     validates :school_email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
     validate :acceptable_image
 
+
+
     has_one_attached :avatar
+    has_one_attached :profile_picture, dependent: :purge_later
 
     def avatar_url
         if avatar.attached?
