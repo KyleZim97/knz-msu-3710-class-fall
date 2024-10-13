@@ -2,13 +2,61 @@
 
 <h1>Students</h1>
 
-<div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
-</div>
+<!-- Search form -->
+<%= form_with(url: students_path, method: :get, local: true) do %>
+  <div class="mb-3">
+    <!-- Major field -->
+    <%= label_tag :major, "Major" %>
+    <%= text_field_tag :major, params[:major], class: "form-control", placeholder: "Enter major" %>
+  </div>
 
-<%= link_to "New student", new_student_path %>
+  <div class="mb-3">
+    <!-- Graduation Date comparison field (Select Option/Before/After) -->
+    <%= label_tag :date_comparison, "Graduation Date (Before/After)" %>
+    <%= select_tag :date_comparison, options_for_select([['Select Option', ''], ['Before', 'before'], ['After', 'after']], params[:date_comparison]), class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <!-- Graduation Date field -->
+    <%= label_tag :graduation_date, "Graduation Date" %>
+    <%= date_field_tag :graduation_date, params[:graduation_date], class: "form-control" %>
+  </div>
+
+  <!-- Search button -->
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+
+  <!-- Show All button -->
+  <%= button_tag "Show All", type: :submit, name: 'show_all', value: '1', class: "btn btn-secondary" %>
+<% end %>
+
+<!-- Show students only if a search is completed -->
+<% if params[:major].present? || params[:date_comparison].present? && params[:graduation_date].present? %>
+  <div id="students">
+    <% if @students.any? %>
+      <% @students.each do |student| %>
+        <%= render student %>
+        <p>
+          <%= link_to "Show this student", student %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>No students found</p>
+    <% end %>
+  </div>
+<% else %>
+  <p>Please perform a search to display students.</p>
+<% end %>
+
+<% if params[:show_all].present? %>
+  <div id="students">
+    <% @students.each do |student| %>
+      <%= render student %>
+      <p>
+        <%= link_to "Show this student", student %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- New student link -->
+<%= link_to "New student", new_student_path, class: "btn btn-primary" %>

@@ -3,8 +3,32 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
-    @students = Student.all
+    @students = Student.all # Default to all students
+  
+    # Check if "Show All" button was clicked
+    if params[:show_all].present?
+      # If "Show All" was clicked, simply fetch all students
+      @students = Student.all
+    elsif params[:major].present? || params[:date_comparison].present? && params[:graduation_date].present?
+      # Filter based on search criteria
+      if params[:major].present?
+        @students = @students.where(major: params[:major])
+      end
+  
+      if params[:graduation_date].present?
+        # Convert graduation_date to Date object
+        graduation_date = Date.parse(params[:graduation_date]) rescue nil
+  
+        # Check date comparison
+        if params[:date_comparison] == 'before' && graduation_date
+          @students = @students.where("graduation_date < ?", graduation_date)
+        elsif params[:date_comparison] == 'after' && graduation_date
+          @students = @students.where("graduation_date > ?", graduation_date)
+        end
+      end
+    end
   end
+
 
   # GET /students/1 or /students/1.json
   def show
@@ -68,3 +92,4 @@ class StudentsController < ApplicationController
       params.require(:student).permit(:first_name, :last_name, :school_email, :major, :minor, :graduation_date, :avatar)
     end
 end
+
