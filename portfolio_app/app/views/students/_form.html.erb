@@ -26,9 +26,10 @@
     <%= form.text_field :school_email %>
   </div>
 
-  <div>
-    <%= form.label :major, style: "display: block" %>
-    <%= form.text_field :major %>
+  <div class="col-md-6" style="width: 13%;">
+    <!-- Major field pulling from the majors table -->
+    <%= form.label :major, "Major", class: "form-label" %>
+    <%= form.select :major, options_from_collection_for_select(Major.all, "name", "name"), { prompt: "Please select a major" }, class: "form-select" %>
   </div>
 
   <div>

@@ -1,0 +1,15 @@
+body {
+    background-color: #FEFAE0; 
+}
+
+.custom-background {
+    background-color: #FEFAE0; 
+}
+
+tbody tr.custom-row-default {
+    background-color: #151413 !important; /* Dark color */
+}
+
+tbody tr.custom-row-secondary {
+    background-color: #CCD5AE !important; /* Lighter color */
+}
