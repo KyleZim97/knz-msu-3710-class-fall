@@ -1,6 +1,6 @@
 <div id="<%= dom_id student %>">
   
-  <p>
+  <p aria-label="Student Profile Image">
     <%= image_tag student.avatar.attached? ? url_for(student.avatar.variant(resize_to_limit: [150, nil])) : asset_path('default_image.jpg'), alt: "Student Avatar", width: "150" %>
   </p>
 

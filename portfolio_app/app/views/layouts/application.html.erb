@@ -22,16 +22,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item active" aria-label="Return to home page">
           <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" aria-label="Dropdown menue">
           <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Sign In</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#" aria-label="Link to sign in">Sign In</a>
+            <a class="dropdown-item" href="#" aria-label="Future actions">Another action</a>
           </div>
         </li>
       </ul>
