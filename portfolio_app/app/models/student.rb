@@ -1,4 +1,8 @@
 class Student < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
     #Constants
     VALID_MAJORS = ["Computer Science BS", "Data Science and Machine Learning", "Mechanical Engineering", "Business Administration", "Psychology", "Biology", "Mathematics", "Nursing", "English Literature", "Political Science"]
     
@@ -7,9 +11,15 @@ class Student < ApplicationRecord
     validates :last_name, presence: true
     validates :major, presence: true
     validates :graduation_date, presence: true
-    validates :school_email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
+    #validates :school_email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
     validate :acceptable_image
     validates :major, inclusion: { in: VALID_MAJORS }
+    validate :email_format
+    def email_format
+        unless email =~ /\A[\w+\-.]+@msudenver\.edu\z/i
+            errors.add(:email, "must be an @msudenver.edu email address")
+        end
+    end 
 
     #relationships
     has_one_attached :avatar
